@@ -1,6 +1,7 @@
 {
   "name": "proyecto-prestamos",
   "version": "1.0.0",
+  "description": "Plataforma de gestión de préstamos",
   "scripts": {
     "dev": "docker-compose -f docker-compose.dev.yml up --build",
     "dev:detached": "docker-compose -f docker-compose.dev.yml up -d --build",
@@ -12,14 +13,6 @@
     "logs:pagos": "docker-compose -f docker-compose.dev.yml logs -f pagos-service",
     "clean": "docker-compose -f docker-compose.dev.yml down -v --remove-orphans",
     "restart": "docker-compose -f docker-compose.dev.yml restart",
-    "shell:postgres": "docker-compose -f docker-compose.dev.yml exec postgres psql -U postgres",
-    "test:all": "npm run test --workspaces",
-    "build:all": "npm run build --workspaces"
-  },
-  "workspaces": [
-    "frontend-plataforma",
-    "backend/usuarios",
-    "backend/prestamos", 
-    "backend/pagos"
-  ]
+    "shell:postgres": "docker-compose -f docker-compose.dev.yml exec postgres psql -U postgres"
+  }
 }
