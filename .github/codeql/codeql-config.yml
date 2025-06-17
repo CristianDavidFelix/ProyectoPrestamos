@@ -1,4 +1,4 @@
-# Configuración CodeQL para Plataforma de Préstamos
+# Configuración CodeQL simplificada para Plataforma de Préstamos
 name: "Proyecto Prestamos CodeQL Config"
 
 # Paths a incluir en el análisis
@@ -28,20 +28,13 @@ paths-ignore:
   - "**/tailwind.config.js"
   - "**/eslint.config.mjs"
 
-# Consultas de seguridad específicas
+# Consultas de seguridad - Solo las estándar
 queries:
   - uses: security-extended
-  - uses: security-and-quality
 
-# Packs de queries para JavaScript/TypeScript
+# Configuración simple de packs
 packs:
-  javascript:
-    - codeql/javascript-queries:Security
-    - codeql/javascript-queries:AlertSuppression
-    - codeql/javascript-queries:Experimental
-
-# Configuración de threading (opcional)
-threads: 0
+  - codeql/javascript-queries
 
 # Modo de compilación
 build-mode: none
