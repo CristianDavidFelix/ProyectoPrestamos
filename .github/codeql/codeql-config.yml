@@ -1,0 +1,47 @@
+# Configuración CodeQL para Plataforma de Préstamos
+name: "Proyecto Prestamos CodeQL Config"
+
+# Paths a incluir en el análisis
+paths:
+  - "frontend-plataforma/src"
+  - "backend/usuarios/src"
+  - "backend/prestamos/src"  
+  - "backend/pagos/src"
+
+# Paths a excluir del análisis
+paths-ignore:
+  - "**/__tests__"
+  - "**/test"
+  - "**/*.test.js"
+  - "**/*.test.ts"
+  - "**/*.test.tsx"
+  - "**/*.spec.js"
+  - "**/*.spec.ts"
+  - "**/node_modules"
+  - "**/coverage"
+  - "**/dist"
+  - "**/.next"
+  - "**/build"
+  - "**/*.d.ts"
+  - "**/jest.config.js"
+  - "**/next.config.js"
+  - "**/tailwind.config.js"
+  - "**/eslint.config.mjs"
+
+# Consultas de seguridad específicas
+queries:
+  - uses: security-extended
+  - uses: security-and-quality
+
+# Packs de queries para JavaScript/TypeScript
+packs:
+  javascript:
+    - codeql/javascript-queries:Security
+    - codeql/javascript-queries:AlertSuppression
+    - codeql/javascript-queries:Experimental
+
+# Configuración de threading (opcional)
+threads: 0
+
+# Modo de compilación
+build-mode: none
