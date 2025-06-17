@@ -126,7 +126,7 @@ jobs:
 
     - name: Upload coverage for usuarios
       if: always()
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v4
       with:
         file: ./backend/usuarios/coverage/lcov.info
         flags: backend-usuarios
@@ -256,7 +256,7 @@ jobs:
 
     - name: Upload coverage for prestamos
       if: always()
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v4
       with:
         file: ./backend/prestamos/coverage/lcov.info
         flags: backend-prestamos
@@ -385,7 +385,7 @@ jobs:
 
     - name: Upload coverage for pagos
       if: always()
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v4
       with:
         file: ./backend/pagos/coverage/lcov.info
         flags: backend-pagos
@@ -688,7 +688,7 @@ jobs:
 
     - name: Upload test artifacts
       if: always()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: backend-test-reports
         path: |
