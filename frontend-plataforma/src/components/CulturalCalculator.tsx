@@ -287,7 +287,7 @@ const CulturalCalculator: React.FC<CulturalCalculatorProps> = ({ onCalculationRe
             </div>
           </div>
 
-          {/* Beneficios Culturales */}
+          {/* Beneficios Culturales en prestamos */}
           {result.culturalBenefits && (
             <div className={styles.benefitsContainer}>
               <h5>{t('cultural.cultural_benefits')}</h5>
@@ -314,7 +314,7 @@ const CulturalCalculator: React.FC<CulturalCalculatorProps> = ({ onCalculationRe
             </div>
           )}
 
-          {/* Información Cultural */}
+          {/* Información Cultural de prestamos*/}
           {culturalInfo && (
             <div className={styles.culturalInfoContainer}>
               <h5>{culturalInfo.title}</h5>
