@@ -1,0 +1,525 @@
+/* Importación de fuentes profesionales */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@400;600&display=swap');
+
+/* Animaciones sutiles para un look profesional */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(0, 102, 204, 0.3); }
+  70% { box-shadow: 0 0 0 8px rgba(0, 102, 204, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 102, 204, 0); }
+}
+
+@keyframes expandWidth {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* Contenedor principal con un fondo limpio */
+.pageContainer {
+  display: flex;
+  background: #f5f7fa;
+  min-height: 100vh;
+  font-family: 'Roboto', 'Open Sans', sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.pageContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(135deg, #003087, #005566);
+  opacity: 0.1;
+  clip-path: polygon(0 0, 100% 0, 100% 60%, 0% 80%);
+  z-index: 0;
+}
+
+/* Contenedor del contenido principal */
+.contentContainer {
+  margin-left: 260px;
+  padding: 50px 40px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+/* Tarjeta del formulario con diseño profesional */
+.formCard {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 40px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  animation: fadeInUp 0.6s ease forwards;
+  border: 1px solid #e2e8f0;
+}
+
+.formCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.formCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #003087, #007bff);
+  animation: expandWidth 0.5s ease-out forwards;
+}
+
+/* Título profesional */
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a202c;
+  text-align: center;
+  margin-bottom: 30px;
+  letter-spacing: -0.3px;
+  line-height: 1.3;
+  font-family: 'Roboto', sans-serif;
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.title::before {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 3px;
+  background: #003087;
+  border-radius: 3px;
+}
+
+/* Formulario con animaciones escalonadas */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.form > * {
+  animation: slideInLeft 0.4s ease-out forwards;
+  opacity: 0;
+}
+
+.form > *:nth-child(1) { animation-delay: 0.1s; }
+.form > *:nth-child(2) { animation-delay: 0.2s; }
+.form > *:nth-child(3) { animation-delay: 0.3s; }
+.form > *:nth-child(4) { animation-delay: 0.4s; }
+.form > *:nth-child(5) { animation-delay: 0.5s; }
+
+/* Grupos de formulario */
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+}
+
+.formGroup:hover .label {
+  color: #003087;
+}
+
+/* Etiquetas con icono a la derecha */
+.label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #4a5568;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Empuja el icono a la derecha */
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+/* Icono a la derecha del texto */
+.label::after {
+  content: none;
+}
+
+.formGroup:hover .label::after {
+  transform: scale(1.3);
+}
+
+.labelIcon {
+  font-size: 16px;
+  color: #003087;
+  opacity: 0.8;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.formGroup:hover .labelIcon {
+  transform: scale(1.2);
+  opacity: 1;
+  color: #007bff;
+}
+
+/* Campos de entrada */
+.inputGroup {
+  position: relative;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.inputGroup::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #003087;
+  transition: width 0.3s ease;
+}
+
+.inputGroup:focus-within::after {
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 15px;
+  font-weight: 400;
+  color: #1a202c;
+  background: #f9fafb;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.input::placeholder {
+  color: #a0aec0;
+}
+
+/* Simulador de cuota */
+.simulatorCard {
+  background: #f9fafb;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0;
+  border-left: 4px solid #007bff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+.simulatorCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.simulatorTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a202c;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Espacio entre el texto y el icono */
+}
+
+/* Icono a la derecha del título del simulador */
+.simulatorTitle::after {
+  content: '₿';
+  font-size: 16px;
+  color: #007bff;
+  opacity: 0.8;
+  font-weight: normal;
+}
+
+.simulatorResult {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.simulatorText {
+  font-size: 14px;
+  color: #4a5568;
+  font-weight: 500;
+}
+
+.simulatorAmount {
+  font-size: 24px;
+  font-weight: 700;
+  color: #003087;
+}
+
+/* Botón de envío */
+.submitButton {
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(90deg, #003087, #007bff);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.submitButton:hover {
+  background: linear-gradient(90deg, #00205b, #005566);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.submitButton:disabled {
+  background: #a0aec0;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Spinner de carga */
+.loadingSpinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #ffffff;
+  animation: spin 1s ease-in-out infinite;
+  margin-right: 8px;
+}
+
+/* Mensajes de error y éxito */
+.errorMessage {
+  background: #fef2f2;
+  color: #b91c1c;
+  padding: 14px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  border-left: 4px solid #b91c1c;
+  box-shadow: 0 4px 12px rgba(185, 28, 28, 0.05);
+  display: flex;
+  align-items: center;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.errorMessage::before {
+  content: "⚠️";
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+.successMessage {
+  background: #f0fdf4;
+  color: #15803d;
+  padding: 14px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  border-left: 4px solid #15803d;
+  box-shadow: 0 4px 12px rgba(21, 128, 61, 0.05);
+  display: flex;
+  align-items: center;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.successIcon {
+  font-size: 18px;
+  margin-right: 8px;
+  color: #15803d;
+}
+
+/* Nota informativa */
+.infoNote {
+  font-size: 13px;
+  color: #4a5568;
+  text-align: center;
+  margin-top: 20px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.infoNote:hover {
+  background: #e2e8f0;
+}
+
+/* Responsividad */
+@media (max-width: 1280px) {
+  .contentContainer {
+    margin-left: 220px;
+    padding: 40px 30px;
+  }
+  
+  .formCard {
+    max-width: 650px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .contentContainer {
+    margin-left: 180px;
+    padding: 30px 20px;
+  }
+  
+  .formCard {
+    padding: 30px;
+  }
+  
+  .title {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .pageContainer::before {
+    height: 150px;
+  }
+  
+  .contentContainer {
+    margin-left: 0;
+    padding: 20px 15px;
+  }
+  
+  .formCard {
+    padding: 25px;
+    max-width: 100%;
+  }
+  
+  .title {
+    font-size: 22px;
+  }
+  
+  .submitButton {
+    padding: 12px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contentContainer {
+    padding: 15px 10px;
+  }
+  
+  .formCard {
+    padding: 20px;
+  }
+  
+  .title {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .input {
+    padding: 12px 14px;
+  }
+  
+  .simulatorAmount {
+    font-size: 22px;
+  }
+  
+  .form {
+    gap: 16px;
+  }
+}
+
+/* Modo oscuro */
+@media (prefers-color-scheme: dark) {
+  .pageContainer {
+    background: #1a202c;
+  }
+  
+  .formCard {
+    background: #2d3748;
+    border: 1px solid #4a5568;
+  }
+  
+  .title {
+    color: #e2e8f0;
+  }
+  
+  .label {
+    color: #a0aec0;
+  }
+  
+  .input {
+    background: #1a202c;
+    border-color: #4a5568;
+    color: #e2e8f0;
+  }
+  
+  .input::placeholder {
+    color: #718096;
+  }
+  
+  .simulatorCard {
+    background: #2d3748;
+  }
+  
+  .simulatorTitle {
+    color: #e2e8f0;
+  }
+  
+  .simulatorText {
+    color: #a0aec0;
+  }
+  
+  .infoNote {
+    color: #a0aec0;
+    background: #1a202c;
+    border-color: #4a5568;
+  }
+  
+  .errorMessage {
+    background: #7f1d1d;
+    color: #f4c7c3;
+  }
+  
+  .successMessage {
+    background: #14532d;
+    color: #bbf7d0;
+  }
+}

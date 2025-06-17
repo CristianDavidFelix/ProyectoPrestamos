@@ -1,0 +1,535 @@
+/* Importación de fuentes profesionales */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@400;600&display=swap');
+
+/* Animaciones para efectos visuales */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Contenedor principal */
+.pageContainer {
+  display: flex;
+  min-height: 100vh;
+  background: #f5f7fa;
+  font-family: 'Roboto', 'Open Sans', sans-serif;
+  color: #1a202c;
+}
+
+/* Contenedor del contenido principal */
+.contentContainer {
+  margin-left: 260px;
+  padding: 40px;
+  width: 100%;
+  position: relative;
+  transition: all 0.3s ease;
+  animation: fadeIn 0.8s ease-out;
+}
+
+/* Encabezado de bienvenida */
+.welcomeHeader {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #1a202c;
+  position: relative;
+  padding-bottom: 15px;
+  animation: slideInRight 0.7s ease-out forwards;
+}
+
+.welcomeHeader::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #003087, #007bff);
+  border-radius: 2px;
+}
+
+/* Mensaje de bienvenida */
+.welcomeMessage {
+  font-size: 16px;
+  color: #4a5568;
+  margin-bottom: 30px;
+  max-width: 800px;
+  line-height: 1.6;
+  animation: slideInRight 0.8s ease-out forwards;
+}
+
+/* Contenedor de las tarjetas */
+.cardsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 30px;
+}
+
+/* Tarjeta individual */
+.card {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  padding: 24px;
+  transition: all 0.3s ease;
+  border-left: 4px solid #003087;
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Encabezado de tarjeta */
+.cardHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.cardIcon {
+  font-size: 24px;
+  color: #003087;
+  margin-right: 12px;
+  background: rgba(0, 48, 135, 0.1);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.cardTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a202c;
+  margin: 0;
+}
+
+.cardContent {
+  color: #4a5568;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Sección de imagen de bienvenida */
+.welcomeImageContainer {
+  margin-top: 40px;
+  max-width: 800px;
+  position: relative;
+  animation: fadeIn 0.9s ease-out forwards;
+}
+
+.welcomeImage {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.welcomeImage:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Sección de métricas */
+.metricsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  margin: 30px 0;
+  animation: fadeIn 1s ease-out forwards;
+}
+
+.metricCard {
+  background: linear-gradient(135deg, #f6f8fb, #ffffff);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.metricCard:hover {
+  background: linear-gradient(135deg, #ffffff, #f6f8fb);
+  transform: translateY(-3px);
+}
+
+.metricValue {
+  font-size: 28px;
+  font-weight: 700;
+  color: #003087;
+  margin-bottom: 5px;
+}
+
+.metricLabel {
+  font-size: 14px;
+  color: #4a5568;
+}
+
+/* Animación del banner */
+.welcomeBanner {
+  background: linear-gradient(-45deg, #003087, #007bff, #0096ff, #00a6ff);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  padding: 30px;
+  border-radius: 10px;
+  color: white;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bannerContent {
+  max-width: 70%;
+}
+
+.bannerTitle {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.bannerText {
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+.bannerBtn {
+  background-color: white;
+  color: #003087;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.bannerBtn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Estado de carga */
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  background: #f5f7fa;
+}
+
+.loadingSpinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(0, 48, 135, 0.1);
+  border-left-color: #003087;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loadingText {
+  color: #4a5568;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Sección de actividades recientes */
+.recentActivitySection {
+  margin-top: 40px;
+  animation: fadeIn 1s ease-out forwards;
+}
+
+.sectionTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sectionIcon {
+  color: #003087;
+}
+
+.activityList {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.activityItem {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e2e8f0;
+  transition: background 0.2s ease;
+}
+
+.activityItem:last-child {
+  border-bottom: none;
+}
+
+.activityItem:hover {
+  background: #f8fafc;
+}
+
+.activityIcon {
+  background: rgba(0, 48, 135, 0.1);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  color: #003087;
+}
+
+.activityContent {
+  flex: 1;
+}
+
+.activityTitle {
+  font-weight: 500;
+  margin-bottom: 3px;
+  color: #1a202c;
+}
+
+.activityTime {
+  font-size: 12px;
+  color: #718096;
+}
+
+.activityStatus {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statusApproved {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+}
+
+.statusPending {
+  background-color: rgba(245, 158, 11, 0.1);
+  color: #f59e0b;
+}
+
+.statusDeclined {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+/* Footer */
+.footer {
+  margin-top: 60px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+  color: #718096;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footerLinks {
+  display: flex;
+  gap: 15px;
+}
+
+.footerLinks a {
+  color: #4a5568;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footerLinks a:hover {
+  color: #003087;
+}
+
+/* Responsive */
+@media (max-width: 1280px) {
+  .contentContainer {
+    margin-left: 220px;
+    padding: 30px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .contentContainer {
+    margin-left: 180px;
+    padding: 25px;
+  }
+  
+  .welcomeHeader {
+    font-size: 24px;
+  }
+  
+  .cardsContainer {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .contentContainer {
+    margin-left: 0;
+    padding: 20px;
+  }
+  
+  .welcomeBanner {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .bannerContent {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .metricsContainer {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .contentContainer {
+    padding: 15px;
+  }
+  
+  .welcomeHeader {
+    font-size: 22px;
+  }
+  
+  .welcomeBanner {
+    padding: 20px;
+  }
+  
+  .bannerTitle {
+    font-size: 20px;
+  }
+  
+  .metricsContainer {
+    grid-template-columns: 1fr;
+  }
+  
+  .cardsContainer {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Modo oscuro (si el sistema lo usa) */
+@media (prefers-color-scheme: dark) {
+  .pageContainer {
+    background: #1a202c;
+    color: #e2e8f0;
+  }
+  
+  .welcomeHeader {
+    color: #f7fafc;
+  }
+  
+  .welcomeMessage {
+    color: #cbd5e0;
+  }
+  
+  .card, .metricCard, .activityList {
+    background: #2d3748;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  }
+  
+  .cardTitle {
+    color: #f7fafc;
+  }
+  
+  .cardContent {
+    color: #cbd5e0;
+  }
+  
+  .metricValue {
+    color: #63b3ed;
+  }
+  
+  .metricLabel {
+    color: #a0aec0;
+  }
+  
+  .activityItem {
+    border-bottom-color: #4a5568;
+  }
+  
+  .activityItem:hover {
+    background: #2c3647;
+  }
+  
+  .activityTitle {
+    color: #f7fafc;
+  }
+  
+  .loadingContainer {
+    background: #1a202c;
+  }
+  
+  .loadingText {
+    color: #cbd5e0;
+  }
+  
+  .footer {
+    border-top-color: #4a5568;
+    color: #a0aec0;
+  }
+  
+  .footerLinks a {
+    color: #cbd5e0;
+  }
+  
+  .footerLinks a:hover {
+    color: #63b3ed;
+  }
+}

@@ -1,0 +1,14 @@
+/* globals.css */
+
+/* Estilo de fondo global para la aplicación */
+body {
+  font-family: 'Arial', sans-serif;
+  background-image: linear-gradient(135deg, #2a9d8f, #264653); /* Gradiente verde */
+  background-color: #f4f7f9; /* Fondo claro */
+  color: #333; /* Color de texto predeterminado */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+}

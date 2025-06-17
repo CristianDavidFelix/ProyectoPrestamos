@@ -1,0 +1,579 @@
+/* Importación de fuentes profesionales */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@400;600&display=swap');
+
+/* Animaciones sutiles */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes expandWidth {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(0, 102, 204, 0.3); }
+  70% { box-shadow: 0 0 0 8px rgba(0, 102, 204, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 102, 204, 0); }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Contenedor principal */
+.detallePrestamoTotalContainer {
+  display: flex;
+  background: #f5f7fa;
+  min-height: 100vh;
+  font-family: 'Roboto', 'Open Sans', sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.detallePrestamoTotalContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(135deg, #003087, #005566);
+  opacity: 0.1;
+  clip-path: polygon(0 0, 100% 0, 100% 60%, 0% 80%);
+  z-index: 0;
+}
+
+/* Contenedor del contenido */
+.contentContainer {
+  margin-left: 260px;
+  padding: 50px 40px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+/* Título principal */
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 30px;
+  letter-spacing: -0.3px;
+  line-height: 1.3;
+  font-family: 'Roboto', sans-serif;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.titleIcon {
+  color: #003087;
+  font-size: 24px;
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: #003087;
+  border-radius: 3px;
+}
+
+/* Header de la tarjeta de préstamo */
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding: 16px 20px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid #003087;
+}
+
+.loanIdSection {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.loanIdLabel {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a202c;
+}
+
+.statusBadge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statusApproved {
+  background-color: rgba(22, 163, 74, 0.1);
+  color: #16a34a;
+  border: 1px solid rgba(22, 163, 74, 0.2);
+}
+
+.statusPending {
+  background-color: rgba(245, 158, 11, 0.1);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.statusRejected {
+  background-color: rgba(220, 38, 38, 0.1);
+  color: #dc2626;
+  border: 1px solid rgba(220, 38, 38, 0.2);
+}
+
+.statusCompleted {
+  background-color: rgba(79, 70, 229, 0.1);
+  color: #4f46e5;
+  border: 1px solid rgba(79, 70, 229, 0.2);
+}
+
+.dateSection {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+/* Pestañas */
+.tabsContainer {
+  display: flex;
+  margin-bottom: 24px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.tabButton {
+  padding: 12px 20px;
+  border: none;
+  background: none;
+  font-size: 15px;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.tabButton:hover {
+  color: #003087;
+}
+
+.activeTab {
+  color: #003087;
+}
+
+.activeTab::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #003087;
+}
+
+/* Tarjetas de resumen */
+.summaryCards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.summaryCard {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.summaryCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.summaryIconContainer {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background: rgba(0, 48, 135, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.summaryIcon {
+  font-size: 24px;
+  color: #003087;
+}
+
+.summaryContent h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #64748b;
+  margin: 0 0 4px 0;
+}
+
+.summaryValue {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a202c;
+  margin: 0;
+}
+
+/* Tarjeta de detalles */
+.detailCard {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.detailRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.detailRow:last-child {
+  border-bottom: none;
+}
+
+.detailLabel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+  color: #64748b;
+}
+
+.detailLabel svg {
+  color: #003087;
+}
+
+.detailValue {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a202c;
+}
+
+/* Barra de progreso */
+.loanProgress {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.loanProgress h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a202c;
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.progressBarContainer {
+  height: 10px;
+  background: #e2e8f0;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.progressBar {
+  height: 100%;
+  background: linear-gradient(90deg, #003087, #007bff);
+  border-radius: 5px;
+}
+
+.progressLabels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 12px;
+  color: #64748b;
+}
+
+/* Tabla de amortización */
+.amortizationTable {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.tableResponsive {
+  overflow-x: auto;
+}
+
+.amortizationTable table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.amortizationTable th {
+  background: #f1f5f9;
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  color: #64748b;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.amortizationTable td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 14px;
+  color: #1a202c;
+}
+
+.amortizationTable tr:last-child td {
+  border-bottom: none;
+}
+
+.amortizationTable tr:hover td {
+  background: #f8fafc;
+}
+
+/* Mensaje de error */
+.errorMessage {
+  background: #fef2f2;
+  color: #b91c1c;
+  padding: 14px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  border-left: 4px solid #b91c1c;
+  box-shadow: 0 4px 12px rgba(185, 28, 28, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+/* Loading spinner */
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.loadingSpinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(0, 48, 135, 0.1);
+  border-radius: 50%;
+  border-top-color: #003087;
+  animation: rotate 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+.loadingContainer p {
+  color: #64748b;
+  font-size: 16px;
+}
+
+/* Mensaje de no datos */
+.noDataMessage {
+  text-align: center;
+  padding: 40px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  color: #64748b;
+  font-size: 16px;
+}
+
+/* Responsividad */
+@media (max-width: 1280px) {
+  .contentContainer {
+    margin-left: 220px;
+    padding: 40px 30px;
+  }
+  
+  .summaryCards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .contentContainer {
+    margin-left: 180px;
+    padding: 30px 20px;
+  }
+  
+  .title {
+    font-size: 24px;
+  }
+  
+  .summaryCards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .detallePrestamoTotalContainer::before {
+    height: 150px;
+  }
+  
+  .contentContainer {
+    margin-left: 0;
+    padding: 20px 15px;
+  }
+  
+  .cardHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .title {
+    font-size: 22px;
+  }
+  
+  .summaryCards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .contentContainer {
+    padding: 15px 10px;
+  }
+  
+  .title {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .tabButton {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+  
+  .detailRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  
+  .detailValue {
+    align-self: flex-end;
+  }
+}
+
+/* Modo oscuro */
+@media (prefers-color-scheme: dark) {
+  .detallePrestamoTotalContainer {
+    background: #1a202c;
+  }
+  
+  .title {
+    color: #e2e8f0;
+  }
+  
+  .cardHeader, 
+  .summaryCard, 
+  .detailCard, 
+  .loanProgress, 
+  .amortizationTable,
+  .loadingContainer,
+  .noDataMessage {
+    background: #2d3748;
+    border-color: #4a5568;
+  }
+  
+  .loanIdLabel,
+  .summaryValue,
+  .detailValue {
+    color: #e2e8f0;
+  }
+  
+  .detailRow {
+    border-bottom-color: #4a5568;
+  }
+  
+  .amortizationTable th {
+    background: #2d3748;
+    color: #a0aec0;
+    border-bottom-color: #4a5568;
+  }
+  
+  .amortizationTable td {
+    color: #e2e8f0;
+    border-bottom-color: #4a5568;
+  }
+  
+  .amortizationTable tr:hover td {
+    background: #3f4a5e;
+  }
+  
+  .progressBarContainer {
+    background: #4a5568;
+  }
+  
+  .errorMessage {
+    background: #7f1d1d;
+    color: #f4c7c3;
+  }
+  
+  .tabsContainer {
+    border-bottom-color: #4a5568;
+  }
+  
+  .tabButton {
+    color: #a0aec0;
+  }
+  
+  .tabButton:hover,
+  .activeTab {
+    color: #90cdf4;
+  }
+  
+  .activeTab::after {
+    background: #90cdf4;
+  }
+}

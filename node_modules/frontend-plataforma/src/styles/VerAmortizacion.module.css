@@ -1,0 +1,56 @@
+/* VerAmortizacion.module.css */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Título de la Página */
+.title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Tabla */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+/* Encabezados de la Tabla */
+.table th {
+    background-color: #007bff;
+    color: white;
+    padding: 12px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Celdas de la Tabla */
+.table td {
+    padding: 12px;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 14px;
+    color: #34495e;
+}
+
+/* Filas de la Tabla */
+.table tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Mensajes de Error */
+.errorMessage {
+    font-size: 14px;
+    color: #dc3545;
+    margin-top: 10px;
+    text-align: center;
+}
