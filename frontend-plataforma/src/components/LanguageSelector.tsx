@@ -49,7 +49,7 @@ const LanguageSelector: React.FC = () => {
             </button>
           ))}
           
-          {/* Información cultural */}
+          {/* Información cultural idioma */}
           <div className={styles.culturalInfo}>
             <div className={styles.culturalNote}>
               <small>
