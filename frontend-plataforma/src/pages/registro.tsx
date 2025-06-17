@@ -31,7 +31,7 @@ export default function Register() {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/api/usuarios/register", {
+      const res = await fetch("http://localhost:3001/api/usuarios/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ nombre, email, password, fechaNacimiento, direccion }),

@@ -1,0 +1,145 @@
+version: '3.8'
+
+networks:
+  loan-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  node_modules_frontend:
+  node_modules_usuarios:
+  node_modules_prestamos:
+  node_modules_pagos:
+
+services:
+  # Base de datos PostgreSQL
+  postgres:
+    image: postgres:13
+    container_name: postgres_loans
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: lol123
+      POSTGRES_MULTIPLE_DATABASES: usuarios,prestamos,pagos_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-databases.sh:/docker-entrypoint-initdb.d/init-databases.sh
+    networks:
+      - loan-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Microservicio de Usuarios (Puerto 3001)
+  usuarios-service:
+    build: 
+      context: ./backend/usuarios
+      dockerfile: Dockerfile
+    container_name: usuarios_service
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=development
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=lol123
+      - POSTGRES_DB=usuarios
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - JWT_SECRET=supersecreto
+      - EMAIL_USER=matthew.salazar1141@gmail.com
+      - EMAIL_PASSWORD=gckbrrwpjwkkmcfv
+      - PORT=3001
+    volumes:
+      - ./backend/usuarios:/app
+      - node_modules_usuarios:/app/node_modules
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - loan-network
+    command: npm run dev
+
+  # Microservicio de Préstamos (Puerto 3002)
+  prestamos-service:
+    build: 
+      context: ./backend/prestamos
+      dockerfile: Dockerfile
+    container_name: prestamos_service
+    ports:
+      - "3002:3002"
+    environment:
+      - NODE_ENV=development
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=lol123
+      - POSTGRES_DB=prestamos
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - JWT_SECRET=supersecreto
+      - USERS_SERVICE_URL=http://usuarios-service:3001/api/usuarios
+      - PORT=3002
+    volumes:
+      - ./backend/prestamos:/app
+      - node_modules_prestamos:/app/node_modules
+    depends_on:
+      postgres:
+        condition: service_healthy
+      usuarios-service:
+        condition: service_started
+    networks:
+      - loan-network
+    command: npm run dev
+
+  # Microservicio de Pagos (Puerto 3003)
+  pagos-service:
+    build: 
+      context: ./backend/pagos
+      dockerfile: Dockerfile
+    container_name: pagos_service
+    ports:
+      - "3003:3003"
+    environment:
+      - NODE_ENV=development
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=lol123
+      - POSTGRES_DB=pagos_db
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - JWT_SECRET=supersecreto
+      - PRESTAMOS_SERVICE_URL=http://prestamos-service:3002/api/prestamos
+      - PORT=3003
+    volumes:
+      - ./backend/pagos:/app
+      - node_modules_pagos:/app/node_modules
+    depends_on:
+      postgres:
+        condition: service_healthy
+      prestamos-service:
+        condition: service_started
+    networks:
+      - loan-network
+    command: npm run dev
+
+  # Frontend Next.js (Puerto 3000)
+  frontend:
+    build: 
+      context: ./frontend-plataforma
+      dockerfile: Dockerfile
+    container_name: frontend_app
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://localhost:3000
+    volumes:
+      - ./frontend-plataforma:/app
+      - node_modules_frontend:/app/node_modules
+    depends_on:
+      - usuarios-service
+      - prestamos-service
+      - pagos-service
+    networks:
+      - loan-network
+    command: npm run dev

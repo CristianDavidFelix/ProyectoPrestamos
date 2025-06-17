@@ -65,7 +65,7 @@ export default function HistorialCrediticio() {
 
             const fetchUserData = async () => {
                 try {
-                    const res = await fetch(`http://localhost:3000/api/usuarios/${id_usuario}/historial-crediticio`, {
+                    const res = await fetch(`http://localhost:3001/api/usuarios/${id_usuario}/historial-crediticio`, {
                         method: 'GET',
                         headers: {
                             'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ export default function HistorialCrediticio() {
             const fetchCreditHistory = async () => {
                 setLoading(true);
                 try {
-                    const res = await fetch(`http://localhost:3000/api/usuarios/${id_usuario}/historial-crediticio`, {
+                    const res = await fetch(`http://localhost:3001/api/usuarios/${id_usuario}/historial-crediticio`, {
                         method: 'GET',
                         headers: {
                             'Content-Type': 'application/json',

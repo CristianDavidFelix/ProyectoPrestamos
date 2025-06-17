@@ -81,7 +81,7 @@ const VerPerfilUsuario = () => {
                 throw new Error("Solo los administradores pueden ver perfiles de usuarios.");
             }
 
-            const res = await fetch(`http://localhost:3000/api/usuarios/perfil/${usuarioId}`, {
+            const res = await fetch(`http://localhost:3001/api/usuarios/perfil/${usuarioId}`, {
                 method: "GET",
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`,

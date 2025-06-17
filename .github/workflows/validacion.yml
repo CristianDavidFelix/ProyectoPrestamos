@@ -1,0 +1,42 @@
+name: PR Validation
+
+on:
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  validate-pr:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Validate PR title
+      run: |
+        echo "Validating PR title: ${{ github.event.pull_request.title }}"
+        # Agregar validaciones específicas si es necesario
+        
+    - name: Check for breaking changes
+      run: |
+        echo "Checking for breaking changes..."
+        git diff --name-only origin/main...HEAD | grep -E "(package\.json|schema\.sql)" || echo "No breaking changes detected"
+        
+    - name: Validate file structure
+      run: |
+        echo "Validating project structure..."
+        required_files=(
+          "frontend-plataforma/package.json"
+          "backend/usuarios/package.json"
+          "backend/prestamos/package.json" 
+          "backend/pagos/package.json"
+        )
+        
+        for file in "${required_files[@]}"; do
+          if [ ! -f "$file" ]; then
+            echo "❌ Required file missing: $file"
+            exit 1
+          fi
+        done
+        
+        echo "✅ Project structure is valid"

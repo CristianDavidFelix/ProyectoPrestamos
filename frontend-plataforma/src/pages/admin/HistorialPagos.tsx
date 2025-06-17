@@ -123,7 +123,7 @@ const HistorialPagos = () => {
 
                 try {
                     console.log(`Fetching user data for ID: ${userId}`);
-                    const userRes = await fetch(`http://localhost:3000/api/usuarios/perfil/${userId}`, {
+                    const userRes = await fetch(`http://localhost:3001/api/usuarios/perfil/${userId}`, {
                         headers: {
                             "Authorization": `Bearer ${localStorage.getItem("token")}`,
                         },

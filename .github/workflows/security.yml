@@ -1,0 +1,74 @@
+name: Security Scans
+
+on:
+  schedule:
+    - cron: '0 2 * * 1' # Lunes a las 2 AM
+  push:
+    branches: [ main ]
+  workflow_call: # Permitir que sea llamado por otros workflows
+
+jobs:
+  codeql:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v3
+      with:
+        languages: javascript, typescript
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v3
+
+  dependency-check:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # Usar npm audit en lugar de OWASP si no hay token
+    - name: Run npm audit for all services
+      run: |
+        echo "🔍 Running npm audit for all services..."
+        
+        services=("frontend-plataforma" "backend/usuarios" "backend/prestamos" "backend/pagos")
+        
+        for service in "${services[@]}"; do
+          if [ -f "$service/package.json" ]; then
+            echo "📦 Auditing $service..."
+            cd "$service"
+            npm audit --audit-level moderate || echo "⚠️ Security warnings found in $service"
+            cd - > /dev/null
+          else
+            echo "⚠️ No package.json found in $service"
+          fi
+        done
+        
+        echo "✅ Security audit completed"
+
+  secret-scan:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Check for secrets in code
+      run: |
+        echo "🔍 Scanning for potential secrets..."
+        
+        # Buscar patrones de secrets comunes
+        if grep -r "password.*=" --include="*.js" --include="*.ts" --include="*.json" . | grep -v node_modules | grep -v ".git"; then
+          echo "⚠️ Potential hardcoded passwords found"
+        fi
+        
+        if grep -r "api_key.*=" --include="*.js" --include="*.ts" --include="*.json" . | grep -v node_modules | grep -v ".git"; then
+          echo "⚠️ Potential API keys found"
+        fi
+        
+        if grep -r "secret.*=" --include="*.js" --include="*.ts" --include="*.json" . | grep -v node_modules | grep -v ".git"; then
+          echo "⚠️ Potential secrets found"
+        fi
+        
+        echo "✅ Secret scan completed"

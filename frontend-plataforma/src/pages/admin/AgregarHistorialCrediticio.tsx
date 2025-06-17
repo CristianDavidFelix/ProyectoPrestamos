@@ -81,7 +81,7 @@ const AgregarHistorialCrediticio = () => {
                 throw new Error("Solo los administradores pueden agregar historial crediticio.");
             }
 
-            const res = await fetch("http://localhost:3000/api/usuarios/crediticio", {
+            const res = await fetch("http://localhost:3001/api/usuarios/crediticio", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

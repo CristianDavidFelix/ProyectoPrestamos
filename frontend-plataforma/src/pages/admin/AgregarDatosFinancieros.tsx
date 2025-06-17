@@ -80,7 +80,7 @@ const AgregarDatosFinancieros = () => {
                 throw new Error("Solo los administradores pueden agregar datos financieros.");
             }
 
-            const res = await fetch("http://localhost:3000/api/usuarios/financiero", {
+            const res = await fetch("http://localhost:3001/api/usuarios/financiero", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

@@ -42,7 +42,7 @@ const registerUser = async (req, res) => {
             process.env.JWT_SECRET,
             { expiresIn: '1h' }
         );
-        const verificationLink = `http://localhost:3000/api/usuarios/verify?token=${verificationToken}`;
+        const verificationLink = `http://localhost:3001/api/usuarios/verify?token=${verificationToken}`;
 
         // Enviar correo
         await sendConfirmationEmail(email, nombre, verificationLink, password);

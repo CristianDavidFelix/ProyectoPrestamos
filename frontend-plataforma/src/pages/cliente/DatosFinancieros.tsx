@@ -56,7 +56,7 @@ export default function DatosFinancieros() {
             const fetchFinancialData = async () => {
                 setLoading(true);
                 try {
-                    const res = await fetch(`http://localhost:3000/api/usuarios/${id_usuario}/datos-financieros`, {
+                    const res = await fetch(`http://localhost:3001/api/usuarios/${id_usuario}/datos-financieros`, {
                         method: 'GET',
                         headers: {
                             'Content-Type': 'application/json',
@@ -130,7 +130,7 @@ export default function DatosFinancieros() {
             
             if (token && id_usuario) {
                 setLoading(true);
-                fetch(`http://localhost:3000/api/usuarios/${id_usuario}/datos-financieros`, {
+                fetch(`http://localhost:3001/api/usuarios/${id_usuario}/datos-financieros`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',

@@ -1,0 +1,44 @@
+name: 🔄 Dependency Updates
+
+on:
+  schedule:
+    - cron: '0 2 * * 1' # Lunes a las 2 AM
+  workflow_dispatch: # Permitir ejecución manual
+
+jobs:
+  update-dependencies:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        service: [frontend-plataforma, backend/usuarios, backend/prestamos, backend/pagos]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Update dependencies
+      working-directory: ./${{ matrix.service }}
+      run: |
+        npm update
+        npm audit fix --audit-level moderate
+        
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v5
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: '🔄 Update dependencies for ${{ matrix.service }}'
+        title: 'chore: update dependencies for ${{ matrix.service }}'
+        body: |
+          Automated dependency update for ${{ matrix.service }}
+          
+          - Updated npm packages to latest compatible versions
+          - Fixed security vulnerabilities
+          
+          Please review and test before merging.
+        branch: update-deps/${{ matrix.service }}
