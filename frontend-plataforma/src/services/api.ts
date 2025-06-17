@@ -18,7 +18,7 @@ const getLanguageHeader = () => {
   return { 'Accept-Language': language };
 };
 
-// Helper to get combined headers
+// Helper to get combined headers api calculator
 const getHeaders = () => {
   return {
     ...getAuthHeader(),
