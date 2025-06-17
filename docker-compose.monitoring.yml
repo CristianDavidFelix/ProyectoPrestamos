@@ -116,7 +116,8 @@ services:
       - monitoring
     restart: unless-stopped
 
-  # Postgres Exporter para métricas de la base de datos
+  
+
   postgres-exporter:
     image: prometheuscommunity/postgres-exporter
     container_name: postgres-exporter
