@@ -1,0 +1,98 @@
+{
+  "common": {
+    "welcome": "Allin kachun",
+    "login": "Yaykuy",
+    "register": "Qillqakuy",
+    "dashboard": "Hatun qillqa",
+    "logout": "Lluqsiy",
+    "save": "Waqaychay",
+    "cancel": "Saqiy",
+    "delete": "Qichuy",
+    "edit": "Tikray",
+    "view": "Qaway",
+    "search": "Maskay",
+    "filter": "Akllana",
+    "loading": "Chaskinakuchkan...",
+    "error": "Pantasqa",
+    "success": "Allin",
+    "warning": "Yuyaychana",
+    "info": "Willakuy"
+  },
+  "loans": {
+    "title": "Qolqe Mañakuy",
+    "apply": "Qolqe Mañay",
+    "amount": "Hayk'a",
+    "term": "Pachakuna",
+    "interest_rate": "Qolqe Yapay",
+    "monthly_payment": "Killapi Qoy",
+    "purpose": "Imarayku",
+    "status": "Imayna kachkan",
+    "approved": "Chaskisqa",
+    "pending": "Suyasqa",
+    "rejected": "Mana Chaskisqa",
+    "paid": "Qosqa",
+    "overdue": "Ch'iqtasqa",
+    "calculator": "Yupana",
+    "amortization": "Qolqe Qoypa Qillqan",
+    "purpose_options": {
+      "business": "Ranqhay/Llamkay",
+      "agriculture": "Chakra/Uywa",
+      "education": "Yachay",
+      "health": "Qhali kay",
+      "housing": "Wasi",
+      "emergency": "Usqhay kay",
+      "other": "Huk"
+    },
+    "cultural_note": "Kay qolqe mañakuyqa ayni kasqanman hina, ayllu sonqowan kuchun"
+  },
+  "payments": {
+    "title": "Qolqe Qoy",
+    "make_payment": "Qolqe Qoy",
+    "payment_history": "Qolqe Qoypa Willakuynin",
+    "due_date": "Qoy P'unchay",
+    "amount_due": "Qoy Kaq",
+    "payment_method": "Imayna Qoy",
+    "payment_date": "Qoy P'unchay",
+    "reference": "Riqsichiq",
+    "receipt": "Chaskiq Qillqa",
+    "installment": "Rakiy",
+    "principal": "Qolqe Uma",
+    "interest": "Yapay",
+    "balance": "Purisqa",
+    "methods": {
+      "cash": "Qolqe Maki",
+      "bank_transfer": "Banco Kachay",
+      "debit_card": "Tarjeta",
+      "mobile_payment": "Telefono Qolqe"
+    }
+  },
+  "profile": {
+    "title": "Ñuqap Kayninchik",
+    "personal_info": "Runap Willakuynin",
+    "financial_info": "Qolqe Willakuy",
+    "credit_history": "Mañakuypa Willakuynin",
+    "documents": "Qillqakuna",
+    "settings": "Churana",
+    "language": "Rimay",
+    "notifications": "Willachikuy",
+    "privacy": "Pakasqa"
+  },
+  "cultural": {
+    "community_support": "Ayllu Yanapay",
+    "indigenous_rights": "Runa Derechonkuna",
+    "cultural_respect": "Kultura Yupaychay",
+    "financial_inclusion": "Qolqe Hap'iy",
+    "traditional_knowledge": "Ñawpa Yachay",
+    "ayni_principle": "Ayni Kamachiy",
+    "minga_concept": "Minga Yuyay",
+    "seasonal_calendar": "Mit'a Killakuna",
+    "harvest_cycle": "Pallaypa Mit'an",
+    "cultural_festivals": "Kultura Raymi"
+  },
+  "messages": {
+    "loan_approved": "Qolqe mañakuyniyki chaskisqa, ayllu sonqowan aynipi",
+    "payment_reminder": "Yuyarichiq: Qoy p'unchayniyki chayamuchkan. Kultura killanta yupaychaykiku",
+    "cultural_support": "Ñuqayku runakunap costumbrenkunata riqsikuyku, yupaychaykutaq",
+    "community_guarantee": "Aylluyki kay mañakuyta yanapan, ayni costumbre hina"
+  }
+}

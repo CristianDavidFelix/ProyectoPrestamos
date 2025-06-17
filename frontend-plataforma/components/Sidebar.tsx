@@ -8,6 +8,9 @@ import {
   FaFileContract, FaBars
 } from 'react-icons/fa';
 import styles from '../src/styles/Sidebar.module.css';
+import { useLanguage } from '../src/contexts/LanguageContext';
+import { useTranslation } from '../src/utils/translations';
+import LanguageSelector from '../src/components/LanguageSelector';
 
 interface SidebarProps {
     role: 'administrador' | 'cliente';
@@ -15,6 +18,8 @@ interface SidebarProps {
 
 const Sidebar = ({ role }: SidebarProps) => {
     const router = useRouter();
+    const { language } = useLanguage();
+    const { t } = useTranslation(language);
     const [userName, setUserName] = useState<string | null>(null);
     const [isOpen, setIsOpen] = useState(true);
     
@@ -89,12 +94,14 @@ const Sidebar = ({ role }: SidebarProps) => {
                         <span className={styles.roleBadge}>
                             {role === 'administrador' ? 'Administrador' : 'Cliente'}
                         </span>
+                        
+                    
                     </div>
                     
                     {/* Navegación */}
                     <div className={styles.navContainer}>
                         <div className={styles.navHeader}>
-                            {role === 'administrador' ? 'Administración' : 'Mi Cuenta'}
+                            {role === 'administrador' ? t('nav.administration') || 'Administración' : t('nav.my_account') || 'Mi Cuenta'}
                         </div>
                         <ul>
                             {role === 'administrador' ? (
@@ -105,7 +112,7 @@ const Sidebar = ({ role }: SidebarProps) => {
                                             className={`${styles.navLink} ${isActive('/admin/GestionarPrestamos') ? styles.active : ''}`}
                                         >
                                             <span className={styles.navIcon}><FaFileContract /></span>
-                                            Gestionar Préstamos
+                                            {t('nav.gestionar_prestamos') || 'Gestionar Préstamos'}
                                         </Link>
                                     </li>
                                     <li>

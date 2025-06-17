@@ -3,9 +3,14 @@ import { useRouter } from "next/router";
 import { FaMoneyBillWave, FaPercentage, FaCalendarAlt, FaArrowRight, FaCheck, FaChartLine, FaInfoCircle } from 'react-icons/fa';
 import Sidebar from '../../../components/Sidebar';
 import styles from '../../styles/SolicitarPrestamo.module.css';
+import { useLanguage } from '../../contexts/LanguageContext';
+import { useTranslation } from '../../utils/translations';
+import CulturalCalculator from '../../components/CulturalCalculator';
 
 const SolicitarPrestamo = () => {
   const router = useRouter();
+  const { language } = useLanguage();
+  const { t } = useTranslation(language);
   const [role, setRole] = useState<'administrador' | 'cliente' | null>(null);
   const [monto, setMonto] = useState<number>(0);
   const [tasa, setTasa] = useState<number>(0);
@@ -20,6 +25,10 @@ const SolicitarPrestamo = () => {
   const montoInputRef = useRef<HTMLInputElement>(null);
   const tasaInputRef = useRef<HTMLInputElement>(null);
   const plazoInputRef = useRef<HTMLInputElement>(null);
+
+  // Estado para la calculadora cultural
+  const [showCulturalCalculator, setShowCulturalCalculator] = useState(false);
+  const [culturalCalculationResult, setCulturalCalculationResult] = useState<any>(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -201,6 +210,14 @@ const SolicitarPrestamo = () => {
     }
   };
 
+  const handleCulturalCalculationResult = (result: any) => {
+    setCulturalCalculationResult(result);
+    // Auto-llenar el formulario con los datos de la calculadora cultural
+    if (result.calculation) {
+      setMonto(result.calculation.principal);
+    }
+  };
+
   // Si no se ha cargado el rol, mostrar mensaje de carga mejorado
   if (!role) {
     return (
@@ -220,121 +237,171 @@ const SolicitarPrestamo = () => {
     <div className={styles.pageContainer}>
       <Sidebar role={role} />
       <div className={styles.contentContainer}>
-        <div ref={formCardRef} className={styles.formCard}>
-          <h1 className={styles.title}>Solicitar un Préstamo</h1>
+        <div className={styles.container}>
+          <h1 className={styles.title}>{t('nav.solicitar_prestamo') || 'Solicitar Préstamo'}</h1>
           
-          {error && (
-            <div className={styles.errorMessage}>
-              {error}
+          {/* Opción de usar calculadora cultural */}
+          <div className={styles.culturalOption}>
+            <button
+              type="button"
+              className={`${styles.culturalToggleButton} ${showCulturalCalculator ? styles.active : ''}`}
+              onClick={() => setShowCulturalCalculator(!showCulturalCalculator)}
+            >
+              <FaChartLine />
+              {showCulturalCalculator ? 'Ocultar Calculadora Cultural' : 'Usar Calculadora Cultural'}
+            </button>
+            <p className={styles.culturalOptionDescription}>
+              {language === 'qu' ? 
+                'Culturanchispa yupanawan aswan allin chaniyuq qullqita tarisun' :
+                language === 'en' ?
+                'Use our cultural calculator for better rates based on your cultural context' :
+                'Usa nuestra calculadora cultural para obtener mejores tasas según tu contexto cultural'
+              }
+            </p>
+          </div>
+
+          {/* Calculadora Cultural */}
+          {showCulturalCalculator && (
+            <div className={styles.culturalCalculatorSection}>
+              <CulturalCalculator onCalculationResult={handleCulturalCalculationResult} />
             </div>
           )}
-          
-          {successMessage && (
-            <div className={styles.successMessage}>
-              <FaCheck className={styles.successIcon} />
-              {successMessage}
-            </div>
-          )}
-          
-        
 
-<form className={styles.form} onSubmit={handleSubmit}>
-  <div className={styles.formGroup}>
-    <label htmlFor="monto" className={styles.label}>
-      Monto
-      <FaMoneyBillWave className={styles.labelIcon} />
-    </label>
-    <div className={styles.inputGroup}>
-      <input
-        ref={montoInputRef}
-        type="number"
-        id="monto"
-        className={styles.input}
-        value={monto}
-        onChange={(e) => setMonto(Number(e.target.value))}
-        placeholder="Ingrese el monto solicitado"
-        required
-      />
-    </div>
-  </div>
-  
-  <div className={styles.formGroup}>
-    <label htmlFor="tasa" className={styles.label}>
-      Tasa de Interés (%)
-      <FaPercentage className={styles.labelIcon} />
-    </label>
-    <div className={styles.inputGroup}>
-      <input
-        ref={tasaInputRef}
-        type="number"
-        id="tasa"
-        className={styles.input}
-        value={tasa}
-        onChange={(e) => setTasa(Number(e.target.value))}
-        placeholder="Ingrese la tasa de interés anual"
-        step="0.01"
-        required
-      />
-    </div>
-  </div>
-  
-  <div className={styles.formGroup}>
-    <label htmlFor="plazo" className={styles.label}>
-      Plazo (en meses)
-      <FaCalendarAlt className={styles.labelIcon} />
-    </label>
-    <div className={styles.inputGroup}>
-      <input
-        ref={plazoInputRef}
-        type="number"
-        id="plazo"
-        className={styles.input}
-        value={plazo}
-        onChange={(e) => setPlazo(Number(e.target.value))}
-        placeholder="Ingrese el plazo en meses"
-        required
-      />
-    </div>
-  </div>
-  
-
-            
-            {cuotaEstimada > 0 && (
-              <div className={styles.simulatorCard}>
-                <h3 className={styles.simulatorTitle}>
-                  <FaChartLine style={{ marginRight: '8px' }} /> 
-                  Simulador de Cuotas
-                </h3>
-                <div className={styles.simulatorResult}>
-                  <span className={styles.simulatorText}>Su cuota mensual estimada será:</span>
-                  <span className={styles.simulatorAmount}>${cuotaEstimada}</span>
+          {/* Resultado de calculadora cultural */}
+          {culturalCalculationResult && (
+            <div className={styles.culturalResultCard}>
+              <h3>Resultado de Cálculo Cultural</h3>
+              <div className={styles.culturalResultGrid}>
+                <div className={styles.culturalResultItem}>
+                  <span>Cuota Mensual:</span>
+                  <span>S/ {culturalCalculationResult.calculation.monthlyPayment.toFixed(2)}</span>
                 </div>
+                <div className={styles.culturalResultItem}>
+                  <span>Tasa de Interés:</span>
+                  <span>{culturalCalculationResult.calculation.interestRate.toFixed(2)}%</span>
+                </div>
+              </div>
+              {culturalCalculationResult.culturalInfo && (
+                <div className={styles.culturalInfoBanner}>
+                  <FaInfoCircle />
+                  <span>{culturalCalculationResult.culturalInfo.culturalNote}</span>
+                </div>
+              )}
+            </div>
+          )}
+
+          <div className={styles.formCard} ref={formCardRef}>
+            <h1 className={styles.title}>Solicitar un Préstamo</h1>
+            
+            {error && (
+              <div className={styles.errorMessage}>
+                {error}
               </div>
             )}
             
-            <button 
-              type="submit" 
-              className={styles.submitButton} 
-              disabled={loading}
-            >
-              {loading ? (
-                <>
-                  <span className={styles.loadingSpinner}></span>
-                  <span>Procesando solicitud...</span>
-                </>
-              ) : (
-                <>
-                  <span>Solicitar Préstamo</span>
-                  <FaArrowRight className={styles.buttonIcon} />
-                </>
-              )}
-            </button>
+            {successMessage && (
+              <div className={styles.successMessage}>
+                <FaCheck className={styles.successIcon} />
+                {successMessage}
+              </div>
+            )}
             
-            <p className={styles.infoNote}>
-              <FaInfoCircle style={{ marginRight: '5px', fontSize: '12px' }} />
-              Al solicitar un préstamo, acepta nuestros términos y condiciones.
-            </p>
-          </form>
+            <form className={styles.form} onSubmit={handleSubmit}>
+              <div className={styles.formGroup}>
+                <label htmlFor="monto" className={styles.label}>
+                  Monto
+                  <FaMoneyBillWave className={styles.labelIcon} />
+                </label>
+                <div className={styles.inputGroup}>
+                  <input
+                    ref={montoInputRef}
+                    type="number"
+                    id="monto"
+                    className={styles.input}
+                    value={monto}
+                    onChange={(e) => setMonto(Number(e.target.value))}
+                    placeholder="Ingrese el monto solicitado"
+                    required
+                  />
+                </div>
+              </div>
+              
+              <div className={styles.formGroup}>
+                <label htmlFor="tasa" className={styles.label}>
+                  Tasa de Interés (%)
+                  <FaPercentage className={styles.labelIcon} />
+                </label>
+                <div className={styles.inputGroup}>
+                  <input
+                    ref={tasaInputRef}
+                    type="number"
+                    id="tasa"
+                    className={styles.input}
+                    value={tasa}
+                    onChange={(e) => setTasa(Number(e.target.value))}
+                    placeholder="Ingrese la tasa de interés anual"
+                    step="0.01"
+                    required
+                  />
+                </div>
+              </div>
+              
+              <div className={styles.formGroup}>
+                <label htmlFor="plazo" className={styles.label}>
+                  Plazo (en meses)
+                  <FaCalendarAlt className={styles.labelIcon} />
+                </label>
+                <div className={styles.inputGroup}>
+                  <input
+                    ref={plazoInputRef}
+                    type="number"
+                    id="plazo"
+                    className={styles.input}
+                    value={plazo}
+                    onChange={(e) => setPlazo(Number(e.target.value))}
+                    placeholder="Ingrese el plazo en meses"
+                    required
+                  />
+                </div>
+              </div>
+              
+              {cuotaEstimada > 0 && (
+                <div className={styles.simulatorCard}>
+                  <h3 className={styles.simulatorTitle}>
+                    <FaChartLine style={{ marginRight: '8px' }} /> 
+                    Simulador de Cuotas
+                  </h3>
+                  <div className={styles.simulatorResult}>
+                    <span className={styles.simulatorText}>Su cuota mensual estimada será:</span>
+                    <span className={styles.simulatorAmount}>${cuotaEstimada}</span>
+                  </div>
+                </div>
+              )}
+              
+              <button 
+                type="submit" 
+                className={styles.submitButton} 
+                disabled={loading}
+              >
+                {loading ? (
+                  <>
+                    <span className={styles.loadingSpinner}></span>
+                    <span>Procesando solicitud...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Solicitar Préstamo</span>
+                    <FaArrowRight className={styles.buttonIcon} />
+                  </>
+                )}
+              </button>
+              
+              <p className={styles.infoNote}>
+                <FaInfoCircle style={{ marginRight: '5px', fontSize: '12px' }} />
+                Al solicitar un préstamo, acepta nuestros términos y condiciones.
+              </p>
+            </form>
+          </div>
         </div>
       </div>
     </div>

@@ -388,6 +388,107 @@
   background: #e2e8f0;
 }
 
+/* Opción de calculadora cultural */
+.culturalOption {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.culturalToggleButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 8px;
+}
+
+.culturalToggleButton:hover {
+  background: linear-gradient(135deg, #d97706, #f59e0b);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+.culturalToggleButton.active {
+  background: linear-gradient(135deg, #059669, #10b981);
+}
+
+.culturalOptionDescription {
+  font-size: 13px;
+  color: #64748b;
+  margin: 0;
+  font-style: italic;
+}
+
+/* Sección de calculadora cultural */
+.culturalCalculatorSection {
+  margin-bottom: 32px;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+/* Tarjeta de resultado cultural */
+.culturalResultCard {
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.culturalResultCard h3 {
+  margin: 0 0 16px 0;
+  color: #0369a1;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.culturalResultGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.culturalResultItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: white;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.culturalResultItem span:first-child {
+  color: #64748b;
+  font-weight: 500;
+}
+
+.culturalResultItem span:last-child {
+  color: #0369a1;
+  font-weight: 700;
+}
+
+.culturalInfoBanner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  background: #fef3c7;
+  border-radius: 6px;
+  color: #92400e;
+  font-size: 13px;
+  font-weight: 500;
+}
+
 /* Responsividad */
 @media (max-width: 1280px) {
   .contentContainer {

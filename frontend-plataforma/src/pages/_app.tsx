@@ -1,8 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import type { AppProps } from 'next/app';
+import { LanguageProvider } from '../contexts/LanguageContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
-    return <Component {...pageProps} />;
+    return (
+        <LanguageProvider>
+            <Component {...pageProps} />
+        </LanguageProvider>
+    );
 }
 
 export default MyApp;

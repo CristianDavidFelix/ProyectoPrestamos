@@ -12,6 +12,21 @@ const getAuthHeader = () => {
   return token ? { Authorization: `Bearer ${token}` } : {};
 };
 
+// Helper to get language header for cultural features
+const getLanguageHeader = () => {
+  const language = localStorage.getItem('preferredLanguage') || 'es';
+  return { 'Accept-Language': language };
+};
+
+// Helper to get combined headers
+const getHeaders = () => {
+  return {
+    ...getAuthHeader(),
+    ...getLanguageHeader(),
+    'Content-Type': 'application/json'
+  };
+};
+
 // Fetch payment history (admin only)
 export const fetchPaymentHistory = async () => {
   try {
@@ -36,5 +51,53 @@ export const fetchUserDetails = async (userId: string) => {
   } catch (error) {
     console.error(`Error fetching user details for ID ${userId}:`, error);
     return { nombre: 'Usuario', apellido: 'Desconocido' };
+  }
+};
+
+// Cultural loan calculator
+export const calculateCulturalLoan = async (loanData: {
+  amount: number;
+  term: number;
+  purpose?: string;
+  culturalConsiderations?: boolean;
+}) => {
+  try {
+    const response = await axios.post(`${API_URL.usuarios}/cultural/loan-calculator`, loanData, {
+      headers: getHeaders()
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error calculating cultural loan:', error);
+    throw error;
+  }
+};
+
+// Get cultural statistics
+export const getCulturalStats = async () => {
+  try {
+    const response = await axios.get(`${API_URL.usuarios}/cultural/stats`, {
+      headers: getHeaders()
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching cultural stats:', error);
+    throw error;
+  }
+};
+
+// Get seasonal payment options
+export const getSeasonalPaymentOptions = async (loanData: {
+  loanAmount: number;
+  purpose: string;
+  region: string;
+}) => {
+  try {
+    const response = await axios.post(`${API_URL.usuarios}/cultural/seasonal-payment-options`, loanData, {
+      headers: getHeaders()
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching seasonal payment options:', error);
+    throw error;
   }
 };

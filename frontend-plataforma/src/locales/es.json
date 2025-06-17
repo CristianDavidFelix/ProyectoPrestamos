@@ -1,0 +1,98 @@
+{
+  "common": {
+    "welcome": "Bienvenido",
+    "login": "Iniciar Sesión",
+    "register": "Registrarse",
+    "dashboard": "Panel Principal",
+    "logout": "Cerrar Sesión",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "view": "Ver",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "warning": "Advertencia",
+    "info": "Información"
+  },
+  "loans": {
+    "title": "Préstamos",
+    "apply": "Solicitar Préstamo",
+    "amount": "Monto",
+    "term": "Plazo",
+    "interest_rate": "Tasa de Interés",
+    "monthly_payment": "Pago Mensual",
+    "purpose": "Propósito del Préstamo",
+    "status": "Estado",
+    "approved": "Aprobado",
+    "pending": "Pendiente",
+    "rejected": "Rechazado",
+    "paid": "Pagado",
+    "overdue": "Vencido",
+    "calculator": "Calculadora de Préstamos",
+    "amortization": "Tabla de Amortización",
+    "purpose_options": {
+      "business": "Negocio/Emprendimiento",
+      "agriculture": "Agricultura/Ganadería",
+      "education": "Educación",
+      "health": "Salud",
+      "housing": "Vivienda",
+      "emergency": "Emergencia",
+      "other": "Otro"
+    },
+    "cultural_note": "Este préstamo respeta los principios de reciprocidad y solidaridad comunitaria"
+  },
+  "payments": {
+    "title": "Pagos",
+    "make_payment": "Realizar Pago",
+    "payment_history": "Historial de Pagos",
+    "due_date": "Fecha de Vencimiento",
+    "amount_due": "Monto a Pagar",
+    "payment_method": "Método de Pago",
+    "payment_date": "Fecha de Pago",
+    "reference": "Referencia",
+    "receipt": "Comprobante",
+    "installment": "Cuota",
+    "principal": "Capital",
+    "interest": "Interés",
+    "balance": "Saldo",
+    "methods": {
+      "cash": "Efectivo",
+      "bank_transfer": "Transferencia Bancaria",
+      "debit_card": "Tarjeta de Débito",
+      "mobile_payment": "Pago Móvil"
+    }
+  },
+  "profile": {
+    "title": "Mi Perfil",
+    "personal_info": "Información Personal",
+    "financial_info": "Información Financiera",
+    "credit_history": "Historial Crediticio",
+    "documents": "Documentos",
+    "settings": "Configuraciones",
+    "language": "Idioma",
+    "notifications": "Notificaciones",
+    "privacy": "Privacidad"
+  },
+  "cultural": {
+    "community_support": "Apoyo Comunitario",
+    "indigenous_rights": "Derechos Indígenas",
+    "cultural_respect": "Respeto Cultural",
+    "financial_inclusion": "Inclusión Financiera",
+    "traditional_knowledge": "Conocimiento Tradicional",
+    "ayni_principle": "Principio del Ayni (Reciprocidad)",
+    "minga_concept": "Concepto de Minga (Trabajo Comunitario)",
+    "seasonal_calendar": "Calendario Estacional",
+    "harvest_cycle": "Ciclo de Cosecha",
+    "cultural_festivals": "Festividades Culturales"
+  },
+  "messages": {
+    "loan_approved": "Su préstamo ha sido aprobado respetando los principios de confianza comunitaria",
+    "payment_reminder": "Recordatorio: Su próximo pago vence pronto. Respetamos su calendario cultural.",
+    "cultural_support": "Nuestro equipo entiende y respeta sus tradiciones financieras",
+    "community_guarantee": "Su comunidad respalda esta solicitud según las tradiciones de reciprocidad"
+  }
+}

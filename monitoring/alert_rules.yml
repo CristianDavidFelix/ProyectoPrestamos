@@ -1,0 +1,114 @@
+groups:
+  - name: microservices_alerts
+    rules:
+      # Alerta cuando un servicio está caído
+      - alert: ServiceDown
+        expr: up == 0
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: "Servicio {{ $labels.job }} está caído"
+          description: "El servicio {{ $labels.job }} en {{ $labels.instance }} ha estado caído por más de 30 segundos."
+
+      # Alerta de alta latencia en requests HTTP
+      - alert: HighLatency
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 2
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Alta latencia detectada en {{ $labels.service }}"
+          description: "El percentil 95 de latencia en {{ $labels.service }} es {{ $value }}s por más de 1 minuto."
+
+      # Alerta de alta tasa de errores HTTP
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{status_code=~"5.."}[5m]) / rate(http_requests_total[5m]) > 0.1
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Alta tasa de errores en {{ $labels.service }}"
+          description: "La tasa de errores 5xx en {{ $labels.service }} es {{ $value | humanizePercentage }} por más de 2 minutos."
+
+      # Alerta de alto uso de CPU
+      - alert: HighCPUUsage
+        expr: 100 - (avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Alto uso de CPU en {{ $labels.instance }}"
+          description: "El uso de CPU en {{ $labels.instance }} es {{ $value }}% por más de 2 minutos."
+
+      # Alerta de alto uso de memoria
+      - alert: HighMemoryUsage
+        expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 80
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Alto uso de memoria en {{ $labels.instance }}"
+          description: "El uso de memoria en {{ $labels.instance }} es {{ $value }}% por más de 2 minutos."
+
+      # Alerta de bajo espacio en disco
+      - alert: LowDiskSpace
+        expr: (1 - (node_filesystem_avail_bytes{fstype!="tmpfs"} / node_filesystem_size_bytes{fstype!="tmpfs"})) * 100 > 80
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Poco espacio en disco en {{ $labels.instance }}"
+          description: "El uso de disco en {{ $labels.instance }} {{ $labels.mountpoint }} es {{ $value }}%."
+
+  - name: business_alerts
+    rules:
+      # Alerta de muchos pagos fallidos
+      - alert: HighPaymentFailureRate
+        expr: rate(payments_processed_total{status="failed"}[5m]) / rate(payments_processed_total[5m]) > 0.2
+        for: 3m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Alta tasa de fallos en pagos"
+          description: "La tasa de pagos fallidos es {{ $value | humanizePercentage }} por más de 3 minutos."
+
+      # Alerta de demasiados préstamos vencidos
+      - alert: HighOverdueLoans
+        expr: sum(overdue_loans_total) > 100
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Muchos préstamos vencidos"  
+          description: "Hay {{ $value }} préstamos vencidos actualmente."
+
+      # Alerta de fallos en registro de usuarios
+      - alert: HighUserRegistrationFailures
+        expr: rate(user_logins_total{status="failed"}[5m]) > 5
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Muchos fallos en login de usuarios"
+          description: "Hay {{ $value }} fallos de login por segundo en los últimos 5 minutos."
+
+      # Alerta de conexiones activas altas
+      - alert: HighActiveConnections
+        expr: active_connections > 100
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Muchas conexiones activas en {{ $labels.service }}"
+          description: "{{ $labels.service }} tiene {{ $value }} conexiones activas."
+
+      # Alerta de queries de base de datos lentas
+      - alert: SlowDatabaseQueries
+        expr: histogram_quantile(0.95, rate(database_query_duration_seconds_bucket[5m])) > 1
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Queries de base de datos lentas en {{ $labels.service }}"
+          description: "El percentil 95 de duración de queries en {{ $labels.service }} es {{ $value }}s."

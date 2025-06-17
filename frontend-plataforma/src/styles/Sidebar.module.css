@@ -283,6 +283,15 @@
   margin-top: 10px;
 }
 
+/* Contenedor del selector de idiomas en el sidebar */
+.languageSelectorContainer {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: center;
+}
+
 /* Responsive adjustments */
 @media (max-width: 1024px) {
   .sidebar {

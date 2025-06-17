@@ -1,0 +1,98 @@
+{
+  "common": {
+    "welcome": "Welcome",
+    "login": "Login",
+    "register": "Register",
+    "dashboard": "Dashboard",
+    "logout": "Logout",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "search": "Search",
+    "filter": "Filter",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Information"
+  },
+  "loans": {
+    "title": "Loans",
+    "apply": "Apply for Loan",
+    "amount": "Amount",
+    "term": "Term",
+    "interest_rate": "Interest Rate",
+    "monthly_payment": "Monthly Payment",
+    "purpose": "Loan Purpose",
+    "status": "Status",
+    "approved": "Approved",
+    "pending": "Pending",
+    "rejected": "Rejected",
+    "paid": "Paid",
+    "overdue": "Overdue",
+    "calculator": "Loan Calculator",
+    "amortization": "Amortization Schedule",
+    "purpose_options": {
+      "business": "Business/Entrepreneurship",
+      "agriculture": "Agriculture/Livestock",
+      "education": "Education",
+      "health": "Health",
+      "housing": "Housing",
+      "emergency": "Emergency",
+      "other": "Other"
+    },
+    "cultural_note": "This loan respects the principles of reciprocity and community solidarity"
+  },
+  "payments": {
+    "title": "Payments",
+    "make_payment": "Make Payment",
+    "payment_history": "Payment History",
+    "due_date": "Due Date",
+    "amount_due": "Amount Due",
+    "payment_method": "Payment Method",
+    "payment_date": "Payment Date",
+    "reference": "Reference",
+    "receipt": "Receipt",
+    "installment": "Installment",
+    "principal": "Principal",
+    "interest": "Interest",
+    "balance": "Balance",
+    "methods": {
+      "cash": "Cash",
+      "bank_transfer": "Bank Transfer",
+      "debit_card": "Debit Card",
+      "mobile_payment": "Mobile Payment"
+    }
+  },
+  "profile": {
+    "title": "My Profile",
+    "personal_info": "Personal Information",
+    "financial_info": "Financial Information",
+    "credit_history": "Credit History",
+    "documents": "Documents",
+    "settings": "Settings",
+    "language": "Language",
+    "notifications": "Notifications",
+    "privacy": "Privacy"
+  },
+  "cultural": {
+    "community_support": "Community Support",
+    "indigenous_rights": "Indigenous Rights",
+    "cultural_respect": "Cultural Respect",
+    "financial_inclusion": "Financial Inclusion",
+    "traditional_knowledge": "Traditional Knowledge",
+    "ayni_principle": "Ayni Principle (Reciprocity)",
+    "minga_concept": "Minga Concept (Community Work)",
+    "seasonal_calendar": "Seasonal Calendar",
+    "harvest_cycle": "Harvest Cycle",
+    "cultural_festivals": "Cultural Festivals"
+  },
+  "messages": {
+    "loan_approved": "Your loan has been approved respecting community trust principles",
+    "payment_reminder": "Reminder: Your next payment is due soon. We respect your cultural calendar.",
+    "cultural_support": "Our team understands and respects your financial traditions",
+    "community_guarantee": "Your community supports this request according to reciprocity traditions"
+  }
+}

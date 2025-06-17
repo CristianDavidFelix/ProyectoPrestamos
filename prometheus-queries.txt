@@ -1,0 +1,170 @@
+# Consultas PromQL para probar en Prometheus
+# Ir a http://localhost:9090 y ejecutar estas consultas
+
+## 🔍 CONSULTAS BÁSICAS
+
+# Ver todos los servicios monitoreados
+up
+
+# Servicios caídos
+up == 0
+
+# Servicios funcionando
+up == 1
+
+## 📊 MÉTRICAS DE SISTEMA
+
+# Uso de CPU por instancia (%)
+100 - (avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100)
+
+# Uso de memoria por instancia (%)
+(1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100
+
+# Uso de disco por instancia (%)
+(1 - (node_filesystem_avail_bytes{fstype!="tmpfs"} / node_filesystem_size_bytes{fstype!="tmpfs"})) * 100
+
+# Load average del sistema
+node_load1
+
+## 🌐 MÉTRICAS HTTP
+
+# Requests por segundo por servicio
+rate(http_requests_total[5m])
+
+# Requests por minuto
+rate(http_requests_total[1m]) * 60
+
+# Total de requests en los últimos 5 minutos
+increase(http_requests_total[5m])
+
+# Tasa de errores 4xx
+rate(http_requests_total{status_code=~"4.."}[5m])
+
+# Tasa de errores 5xx  
+rate(http_requests_total{status_code=~"5.."}[5m])
+
+# Porcentaje de errores
+rate(http_requests_total{status_code=~"[45].."}[5m]) / rate(http_requests_total[5m]) * 100
+
+## ⏱️ MÉTRICAS DE LATENCIA
+
+# Latencia promedio
+rate(http_request_duration_seconds_sum[5m]) / rate(http_request_duration_seconds_count[5m])
+
+# Latencia P50 (mediana)
+histogram_quantile(0.5, rate(http_request_duration_seconds_bucket[5m]))
+
+# Latencia P95
+histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))
+
+# Latencia P99
+histogram_quantile(0.99, rate(http_request_duration_seconds_bucket[5m]))
+
+## 🔗 MÉTRICAS DE CONEXIONES
+
+# Conexiones activas por servicio
+active_connections
+
+# Conexiones de base de datos por estado
+database_connections_pool
+
+## 💰 MÉTRICAS DE NEGOCIO
+
+# Registros de usuarios por minuto
+rate(user_registrations_total[1m]) * 60
+
+# Logins exitosos vs fallidos
+rate(user_logins_total{status="success"}[5m])
+rate(user_logins_total{status="failed"}[5m])
+
+# Pagos procesados por hora
+rate(payments_processed_total[1h]) * 3600
+
+# Pagos exitosos vs fallidos
+rate(payments_processed_total{status="success"}[5m])
+rate(payments_processed_total{status="failed"}[5m])
+
+# Tasa de pagos fallidos (%)
+rate(payments_processed_total{status="failed"}[5m]) / rate(payments_processed_total[5m]) * 100
+
+# Préstamos creados por día
+rate(loans_created_total[1d]) * 86400
+
+# Préstamos activos
+active_loans_total
+
+# Préstamos vencidos
+overdue_loans_total
+
+## 🗄️ MÉTRICAS DE BASE DE DATOS
+
+# Duración de queries de BD (promedio)
+rate(database_query_duration_seconds_sum[5m]) / rate(database_query_duration_seconds_count[5m])
+
+# Queries lentas (P95)
+histogram_quantile(0.95, rate(database_query_duration_seconds_bucket[5m]))
+
+## 📈 CONSULTAS DE ANÁLISIS
+
+# Top 5 servicios con más requests
+topk(5, rate(http_requests_total[5m]))
+
+# Top 5 servicios con mayor latencia
+topk(5, histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])))
+
+# Top 5 servicios con más errores
+topk(5, rate(http_requests_total{status_code=~"[45].."}[5m]))
+
+# Servicios ordenados por conexiones activas
+sort_desc(active_connections)
+
+## 🎯 CONSULTAS PARA ALERTAS
+
+# Servicios caídos por más de 30 segundos
+up == 0
+
+# Alta latencia (P95 > 2 segundos)
+histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 2
+
+# Alta tasa de errores (> 10%)
+rate(http_requests_total{status_code=~"5.."}[5m]) / rate(http_requests_total[5m]) > 0.1
+
+# Alto uso de CPU (> 80%)
+100 - (avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+
+# Alto uso de memoria (> 80%)
+(1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 80
+
+# Muchas conexiones activas (> 100)
+active_connections > 100
+
+# Queries de BD lentas (P95 > 1 segundo)
+histogram_quantile(0.95, rate(database_query_duration_seconds_bucket[5m])) > 1
+
+## 📊 CONSULTAS PARA DASHBOARDS
+
+# Throughput por servicio (requests/min)
+sum(rate(http_requests_total[1m]) * 60) by (service)
+
+# Error rate por servicio (%)
+sum(rate(http_requests_total{status_code=~"[45].."}[5m])) by (service) / sum(rate(http_requests_total[5m])) by (service) * 100
+
+# Latencia promedio por servicio
+sum(rate(http_request_duration_seconds_sum[5m])) by (service) / sum(rate(http_request_duration_seconds_count[5m])) by (service)
+
+# Crecimiento de usuarios (últimas 24h)
+increase(user_registrations_total[24h])
+
+# Volumen de pagos (últimas 24h)
+sum(increase(payment_amount[24h]))
+
+# Eficiencia de préstamos (aprobados vs rechazados)
+sum(rate(loans_created_total{status="approved"}[1h])) / sum(rate(loans_created_total[1h])) * 100
+
+## 💡 TIPS PARA USAR ESTAS CONSULTAS:
+
+# 1. Copia y pega en la barra de consultas de Prometheus
+# 2. Ajusta los intervalos de tiempo según necesites (5m, 1h, 1d, etc.)
+# 3. Filtra por servicios específicos agregando {service="nombre-servicio"}
+# 4. Usa estas consultas como base para crear alertas en alert_rules.yml
+# 5. Importa las que más te sirvan a dashboards de Grafana
